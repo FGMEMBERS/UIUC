@@ -3,7 +3,7 @@
 # Aircraft:
 #
 # A-4D Skyhawk
-# Attach Bomber
+# Attack Bomber
 #
 # File
 # a4-v1-nl (version 1, non-linear model)
@@ -276,29 +276,3 @@ gear muGear      9     0.01     # rolling coefficient
 gear strutLength 9     -.5      # gear travel [ft] (not yet used)
 
 *
-
-#record aileron_sas_deg
-#record elevator_sas_deg
-#record rudder_sas_deg
-#record gload
-#record Gear_handle
-#record Flap_handle
-#record flap_pos
-#record LD
-#record V_down_fpm
-#record aileron
-#record rudder
-#record elevator
-#record w_induced
-#record downwashAngle_deg
-#record alphaTail_deg
-#record gammaWing
-#record gyroMomentQ
-#record gyroMomentR
-#record gload
-#record Alpha_deg
-#record debug2
-#record CmfadeI
-#record Cm
-#record F_X_engine
-#record V_calibrated_kts
