@@ -58,13 +58,11 @@ init use_dyn_on_speed_curve1
 init dyn_on_speed  2
 init dyn_on_speed_zero 1
 
-
 # geometry
 geometry bw   40.3      # [ft]
 geometry cbar  6.2      # [ft]
 # biplane!
 geometry Sw  518         # [ft^2]
-
 
 # canard
 controlSurface de 20 20 # [deg]
@@ -79,7 +77,7 @@ controlSurface dr 60 60 # [deg]
 #controlSurface dr 30 30 # [deg]
 
 mass Weight    750      # [lb]
-# estimates mass moments
+# mass moments estimates from Culick paper
 mass I_xx     1318      # [slug-ft^2]
 mass I_yy      271      # [slug-ft^2]
 mass I_zz     1343      # [slug-ft^2]
@@ -110,6 +108,9 @@ CD CDfa   CDfa.dat    0 1
 Cm Cmfa   Cmfa2.dat   0 1
 Cm Cmfade Cmfade6.dat 0 1 1
 Cm Cm_q     -3.5        # [/rad], estimate
+# correct 2D data to 3D
+# the biplane effect reduces the 2D moment because each airfoil/wing is immersed in the other's curved slipstream
+Cm Cmo  .02
 
 # da negative right aileron TEU
 CY CY_beta   -.321       # [/rad], -.0056/deg
@@ -178,6 +179,9 @@ gear kgear       4   800        # [lbs/ft]
 gear muGear      4     0        # rolling coefficient
 gear strutLength 4     2.5      # gear travel [ft] (not yet used)
 
+#record elevator_deg
+#record Long_trim_deg
+
 #record Simtime
 #record Alpha_deg
 #record CL
@@ -187,7 +191,6 @@ gear strutLength 4     2.5      # gear travel [ft] (not yet used)
 #record rudder_deg
 #record CmfaI
 #record CmfadeI
-#record Long_trim_deg
 #record M_m_cg
 #record M_m_rp
 #record F_Z
