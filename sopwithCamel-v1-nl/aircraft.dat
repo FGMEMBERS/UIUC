@@ -107,7 +107,7 @@ engine eta_q_Cn_dr    1
 
 # Lift buildup
 # Lift curve 
-CL CLfa CLfa-06.dat 0 1  # [x] Sopwith Camel notes p 020927 p 4
+CL CLfa CLfa.dat 0 1     # [x] Sopwith Camel notes p 020927 p 4
 CL CL_adot  0.5776       # [/rad] [x] Sopwith Camel notes 020928 p 3
 CL CL_q     1.153        # [/rad] [x] Sopwith Camel notes 020928 p 4
 
@@ -115,7 +115,7 @@ CL CL_q     1.153        # [/rad] [x] Sopwith Camel notes 020928 p 4
 # aircraft parasite drag
 CD CDo      0.0378          # [x] NASA SP-468
 # extra wing parasite drag
-CD CDfa CDfa-06.dat 0 1 1   # [x] Sopwith Camel notes p 020927 p 4
+CD CDfa CDfa.dat 0 1 1      # [x] Sopwith Camel notes p 020927 p 4
 # drag due to elevator deflection
 CD CD_de 0.007              # [x] Sopwith Camel notes 021018 p 2
 #CD CDfade CDfade.dat 0 1 1
@@ -124,9 +124,9 @@ CD CDK 0.0645               # [x] Sopwith Camel notes 020928 p 1
 
 # Pitching moment 
 # Moment due to wing from nominally +-180 deg 
-Cm Cmfa Cmfa-06.dat  0 1        # [x] Sopwith Camel notes p 020927 p 4
+Cm Cmfa Cmfa.dat  0 1           # [x] Sopwith Camel notes p 020927 p 4
 # Moment due to tail curve from nominally +-180 deg 
-Cm Cmfade Cmfade-03.dat  0 1 1  # [x] Sopwith Camel notes 021019 p 2
+Cm Cmfade Cmfade.dat  0 1 1     # [x] Sopwith Camel notes 021019 p 2
 Cm Cm_adot -0.9612              # [/rad]  [x] Sopwith Camel notes 020928 p 3
 Cm Cm_q    -1.9182              # [/rad]  [x] Sopwith Camel notes 020928 p 4
 
@@ -209,6 +209,18 @@ gear cgear   5  150      # [lbs/ft/sec]
 gear kgear   5  300      # [lbs/ft]
 gear muGear  5 10.0      # rolling coefficient
 gear strutLength 5 2.5   # [ft]
+
+record Simtime
+record Alpha_deg
+record Beta_deg
+record CL
+record CLfaI
+record CD
+record CDfaI
+record Cm
+record CmfaI
+*
+record V_rel_wind
 
 record Simtime
 #record Alpha_deg
