@@ -2,27 +2,27 @@
 #
 # Aircraft:
 #
-# Generic Hang Glider
+# Simulates the Airwave Xtreme 150 hang glider
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 # Authors:
 #
 # Michael Selig 
-#   - started from Twin Otter files and fiddled
-#   - changed from CZ and CX to CL and CD (020208) 
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 # Notes:
-# [] For directional control, "ailerons" are use.  The c.g. shift is not yet modeled.
+# - Models c.g. shift by way of modifying the aerodynamics
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-init use_V_rel_wind_2U
-init use_dyn_on_speed_curve1
-init dyn_on_speed  2
-init dyn_on_speed_zero 1
+init use_V_rel_wind_2U    
+init use_dyn_on_speed_curve1    
+init dyn_on_speed  2    
+init dyn_on_speed_zero 1    
+init use_Alpha_dot_on_speed 3   # [ft/sec] speed below which Alpha_dot is set to zero    
+init use_gamma_horiz_on_speed 5 # [ft/sec] speed above which Gamma_horiz_deg is used in chase view [1]
 
 
 # geometry
@@ -32,8 +32,7 @@ geometry Sw  154.0      # [ft^2]
 
 # Moving the elevator stick simulates the pilot moving back and forth.
 # Both the c.g. shift and change in angle of attack are accounted for.
-controlSurface de 1.05 1.05 # [deg]
-# 
+controlSurface de 1.05 1.05 # [deg] 
 controlSurface da 20 20     # [deg]
 
 mass Weight    275      # [lb]
@@ -146,22 +145,4 @@ gear kgear       6 300     # [lbs/ft]
 gear muGear      6 0.01    # rolling coefficient
 gear strutLength 6 2.5     # [ft]
 
-#record W_dot_body
-#record P_dot_body
-#record Q_dot_body
-
-#init recordRate 20
-#record Simtime
-#record Alpha_deg
-#record CL
-#record CD
-#record Cm
-#record Theta
-#record Q_dot_body
-#record elevator_deg
-#record CmfadeI
-#record Cm_q_save
-#record V_rel_wind
-#record U_body
-#record beta_flow_clean_tail
 *

@@ -37,13 +37,18 @@
 # [] model spin by including nonlinear cn data
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# The Sopwith Camel was actually unstable.
+# Fly w/ an aft cg to try this out.
+#init Dx_cg -.3
+#record Dx_cg
+
 # various "init" FGFS settings
 init use_V_rel_wind_2U    
 init use_dyn_on_speed_curve1    
 init dyn_on_speed  2    
 init dyn_on_speed_zero 1    
-
 init use_Alpha_dot_on_speed 7   # [ft/sec] speed below which Alpha_dot is set to zero    
+init use_gamma_horiz_on_speed 5 # [ft/sec] speed above which Gamma_horiz_deg is used in chase view [1]
 
 init downwashMode 100    
 init downwashCoef 0.030  # [1/ft] [x] Sopwith Camel notes 020928 p 1
@@ -210,92 +215,4 @@ gear kgear   5  300      # [lbs/ft]
 gear muGear  5 10.0      # rolling coefficient
 gear strutLength 5 2.5   # [ft]
 
-*
-
-record Simtime
-record Alpha_deg
-record Beta_deg
-record CL
-record CLfaI
-record CD
-record CDfaI
-record Cm
-record CmfaI
-*
-record V_rel_wind
-
-record Simtime
-#record Alpha_deg
-record Beta_deg
-*
-# various record lines below are perserved for future development
-
-*
-
-#record debug2
-*
-
-#record CmfadeI
-#record debug1
-
-
-#record F_X_engine
-#record F_X_aero
-
-#record Alpha_deg
-#record debug2
-#record debug3
-#record V_rel_wind
-#record Beta_deg
-*
-
-#record CL
-#record elevator_deg
-*
-
-#record eta_q
-#record Q_body
-#record R_body
-#record Throttle_3
-#record debug1
-#record debug2
-#record debug3
-*
-
-#record V_rel_wind
-#record F_Z_aero
-
-#record Dynamic_pressure
-#record CL
-#record CLfaI
-#record CL_adot_save
-#record CL_q_save
-#record Alpha_dot
-*
-
-
-#record Throttle_3
-#record V_calibrated_kts
-#record F_X_engine
-#record Alpha_deg
-#record CmfaI
-#record Cm
-*
-
-#record Simtime
-#record rudder
-#record aileron
-#record Alpha
-#record CDfaI
-#record CLfaI
-#record CmfaI
-#record CDfadeI
-#record CLfadeI
-#record aileron
-#record ClfadaI
-#record CnfadaI
-#record Beta
-#record rudder
-#record CYfbetadrI
-#record CnfbetadrI
 *

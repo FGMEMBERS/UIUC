@@ -44,6 +44,13 @@
 
 init Dz_cg 0
 
+init use_V_rel_wind_2U    
+init use_dyn_on_speed_curve1    
+init dyn_on_speed  2    
+init dyn_on_speed_zero 1    
+init use_Alpha_dot_on_speed 7   # [ft/sec] speed below which Alpha_dot is set to zero    
+init use_gamma_horiz_on_speed 20 # [ft/sec] speed above which Gamma_horiz_deg is used in chase view [1]
+
 geometry bw     46.     # [ft]
 geometry cbar    6.5    # [ft]
 geometry Sw    280.     # [ft^2]
@@ -59,12 +66,10 @@ mass I_yy     15148     # [slug-ft^2]
 mass I_zz     23046     # [slug-ft^2]
 mass I_xz      1600     # [slug-ft^2]
 
-
 # Roskam: CTx=0.162 (SL conditions) --> 1550 lb
 # aircraft specs: two engines of 553 kW each
 #                               ~2300 lb static thrust each
 engine simpleSingle 2300 # [lb]
-
 
 CL CLo      0.201       # []
 CL CL_a     5.48        # [/rad]
@@ -102,7 +107,7 @@ Cn Cn_dr   -0.0772      # [/rad]
 # nose wheel (must be position 0 if present)
 gear Dx_gear 0 10.5     # x-offset from CG [ft]
 gear Dy_gear 0 0        # y-offset from CG [ft]
-gear Dz_gear 0 4.05     # z-offset from CG [ft]
+gear Dz_gear 0 5.35     # z-offset from CG [ft]
 gear cgear 0 4000       # damping [lbs/ft/sec]
 gear kgear 0 8000       # springiness [lbs/ft]
 gear muGear 0 0.01      # rolling coefficient
@@ -111,7 +116,7 @@ gear strutLength 0 -0.5 # gear travel [ft] (not yet used)
 # right gear (must be position 1 if present)
 gear Dx_gear 1 -3.9     # [ft]
 gear Dy_gear 1 6.25     # [ft]
-gear Dz_gear 1 4        # [ft]
+gear Dz_gear 1 5.3      # [ft]
 gear cgear 1 4000       # [lbs/ft/sec]
 gear kgear 1 8000       # [lbs/ft]
 gear muGear 1 0.01      # rolling coefficient
@@ -120,12 +125,10 @@ gear strutLength 1 2.5  # [ft]
 # left gear (must be position 2 if present)
 gear Dx_gear 2 -3.9     # [ft]
 gear Dy_gear 2 -6.25    # [ft]
-gear Dz_gear 2 4        # [ft]
+gear Dz_gear 2 5.3      # [ft]
 gear cgear 2 4000       # [lbs/ft/sec]
 gear kgear 2 8000       # [lbs/ft]
 gear muGear 2 0.01      # rolling coefficient
 gear strutLength 2 2.5  # [ft]
 
-
-# end of file '*'
 *

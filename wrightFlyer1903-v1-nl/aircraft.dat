@@ -56,6 +56,7 @@ init use_dyn_on_speed_curve1
 init dyn_on_speed  2
 init dyn_on_speed_zero 1
 init use_Alpha_dot_on_speed 2   # [ft/sec] speed below which Alpha_dot is set to zero    
+init use_gamma_horiz_on_speed 10 # [ft/sec] speed above which Gamma_horiz_deg is used in chase view [1]
 
 # geometry
 geometry bw   40.3      # [ft]
@@ -95,7 +96,8 @@ mass I_yy_appMass_ratio  .14
 
 
 # [] max thrust estimate
-engine simpleSingleModel 171 -5  88    # [lb] [fps]  [lb/fps]
+#engine simpleSingleModel 171 -5  88    # [lb] [fps]  [lb/fps]
+engine simpleSingleModel 165 -5  88    # [lb] [fps]  [lb/fps]
 # where token3 - static thrust in [lb]
 #       token4 - speed at which thrust goes to zero [ft/sec]
 #       token5 - slope dT/dV at the speed at which thrust goes to zero [lb/fps]
@@ -164,55 +166,37 @@ gear strutLength 2     2.5      # gear travel [ft] (not yet used)
 # right wing
 gear Dx_gear     3    -4        # [ft]
 gear Dy_gear     3    21        # [ft]
-gear Dz_gear     3     2.6      # [ft]
+gear Dz_gear     3     3.0      # [ft]
 gear cgear       3   400        # [lbs/ft/sec]
 gear kgear       3   800        # [lbs/ft]
-gear muGear      3     0        # rolling coefficient
+gear muGear      3     0.0      # rolling coefficient
 gear strutLength 3     2.5      # gear travel [ft] (not yet used)
 
 # left wing
 gear Dx_gear     4    -4        # [ft]
 gear Dy_gear     4   -21        # [ft]
-gear Dz_gear     4     2.6      # [ft]
+gear Dz_gear     4     3.0      # [ft]
 gear cgear       4   400        # [lbs/ft/sec]
 gear kgear       4   800        # [lbs/ft]
-gear muGear      4     0        # rolling coefficient
+gear muGear      4     0.0      # rolling coefficient
 gear strutLength 4     2.5      # gear travel [ft] (not yet used)
 
 # right wing
 gear Dx_gear     5     3        # [ft]
 gear Dy_gear     5    21        # [ft]
-gear Dz_gear     5     2.6      # [ft]
+gear Dz_gear     5     3.0      # [ft]
 gear cgear       5   400        # [lbs/ft/sec]
 gear kgear       5   800        # [lbs/ft]
-gear muGear      5     0        # rolling coefficient
+gear muGear      5     0.0      # rolling coefficient
 gear strutLength 5     2.5      # gear travel [ft] (not yet used)
 
 # left wing
 gear Dx_gear     6     3        # [ft]
 gear Dy_gear     6   -21        # [ft]
-gear Dz_gear     6     2.6      # [ft]
+gear Dz_gear     6     3.0      # [ft]
 gear cgear       6   400        # [lbs/ft/sec]
 gear kgear       6   800        # [lbs/ft]
-gear muGear      6     0        # rolling coefficient
+gear muGear      6     0.0      # rolling coefficient
 gear strutLength 6     2.5      # gear travel [ft] (not yet used)
 
 *
-
-#record aileron_deg
-#record rudder_deg
-#record elevator_deg
-#record Long_trim_deg
-#record Simtime
-#record Alpha_deg
-#record CL
-#record Cm
-#record CmfaI
-#record CmfadeI
-#record M_m_cg
-#record M_m_rp
-#record F_Z
-#record F_X
-#* 
-
-

@@ -39,6 +39,15 @@
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+# various "init" FGFS settings
+init use_V_rel_wind_2U    
+init use_dyn_on_speed_curve1    
+init dyn_on_speed  2    
+init dyn_on_speed_zero 1    
+init use_Alpha_dot_on_speed 7   # [ft/sec] speed below which Alpha_dot is set to zero    
+init use_gamma_horiz_on_speed 15 # [ft/sec] speed above which Gamma_horiz_deg is used in chase view [1]
+
 #init Dz_cg     2.5      # [ft]
 
 geometry bw    26.3     # [ft]
@@ -55,11 +64,9 @@ mass I_yy    4800       # [slug-ft^2]
 mass I_zz    5200       # [slug-ft^2]
 mass I_xz     200       # [slug-ft^2]
 
-
 # Roskam: CTx=0.022 (cruise conditions) --> 600 lb
 # aircraft specs: 2500 lb static thrust
 engine simpleSingle 2100 # [lb]
-
 
 CL CLo      0.149       # []
 CL CL_a     5.50        # [/rad]
@@ -124,6 +131,4 @@ gear kgear 2  900       # [lbs/ft]
 gear muGear 2 0.01      # rolling coefficient
 gear strutLength 2 2.5  # [ft]
 
-
-# end of file '*'
 *
