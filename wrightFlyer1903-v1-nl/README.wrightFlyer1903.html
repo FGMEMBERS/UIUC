@@ -4,13 +4,17 @@
 = 1903 Wright Flyer                                  =
 = for FlightGear with LaRCsim and the UIUC Aeromodel =
 =                                                    =
-= Michael Selig, et al                               =
+= Flight model by:                                   =
+= Michael Selig, et al  (m-selig@uiuc.edu)           =
 = <a href="http://amber.aae.uiuc.edu/~m-selig/apasim.html">http://amber.aae.uiuc.edu/~m-selig/apasim.html</a>     =
+=                                                    =
+= Visual model by:                                   =
+= Jim Wilson (jimw@kelcomaine.com)                   =
 ======================================================
 
 To run, try:
 
-fgfs --aircraft=wrightFlyer1903-v1-nl-uiuc --enable-auto-coordination --start-date-sys=1903:12:18:10:35:00:
+fgfs --aircraft=wrightFlyer1903-v1-nl-uiuc --disable-random-objects
 
 Files and directory structure required in $FG_ROOT/Aircraft/ to fly the
 model:
@@ -22,6 +26,11 @@ UIUC/wrightFlyer1903-v1-nl/CDfa.dat
 UIUC/wrightFlyer1903-v1-nl/Cmfa2.dat
 UIUC/wrightFlyer1903-v1-nl/Cmfade6.dat
 UIUC/wrightFlyer1903-v1-nl/CLfade.dat
+wrightFlyer1903/Models/WrightFlyer-pb-jw-01.rgb ... snapshot from 11/9/02
+wrightFlyer1903/Models/WrightFlyer-pb-jw-02.rgb
+wrightFlyer1903/Models/WrightFlyer-pb-jw-03.rgb
+wrightFlyer1903/Models/WrightFlyer-pb-jw.ac
+wrightFlyer1903/Models/WrightFlyer-pb-jw.xml
 
 These files above come with the FlightGear base package.
 
@@ -37,38 +46,20 @@ wrightFlyer1903/Models/uiuc/03Flyer/wing2_32.bmp
 wrightFlyer1903/Models/uiuc/03Flyer/wing2.bmp
 wrightFlyer1903/Models/uiuc/03Flyer/03Flyer-model.xml
 
-Information on these files can be obtained from Wolfram Kuss' website
-here:
-
-<a href="http://home.t-online.de/home/Wolfram.Kuss/">http://home.t-online.de/home/Wolfram.Kuss/</a>
-
-The 3D model is here:
+Other external models can be found, but they will not be as good as
+the FGFS customized one from Jim Wilson.  The other sites:
 
 <a href="http://home.t-online.de/home/Wolfram.Kuss/FGFS1/FGFS1.htm">http://home.t-online.de/home/Wolfram.Kuss/FGFS1/FGFS1.htm</a>
 
-Another source is apparently:
+and
+
 <a href=" http://www.flightxpress.de/files/0402/FS2002/Flugzeuge/wright03.zip">http://www.flightxpress.de/files/0402/FS2002/Flugzeuge/wright03.zip</a>
-
-Download the zip file and model files in the directory indicated
-above.  Under linux, the files from zip archive might need to be
-renamed to lower case (if they are not already that way).  Renaming to
-lower case will be necessary if FlightGear crashes when trying to read
-the texture files.
-
-To use the new aircraft model and not the default Opus glider, edit the
-wrightFlyer1903-v1-nl-uiuc-set.xml file and change the string:
-
-"Aircraft/UIUC/Models/opus/opus-model.xml"
-
-to 
-
-"Aircraft/wrightFlyer1903/Models/uiuc/03Flyer/03Flyer-model.xml"
-
-after the model files have been installed.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Model description and updates:
+
+11/9/02 - Made mention of Jim Wilson's 3D model in this file.
 
 5/26/02 - First release: v1-nl
 
