@@ -46,7 +46,7 @@
 # [] change moments of inertia w/ water ballast
 # [] add in ground effect
 # [] add in spoilers
-# [] include air sounds
+# [x] include air sounds
 # [] include nonlinear Cn_beta for high side slip
 # [] stick to elevator throw is likely nonlinear, unlike what I have now
 # [] included Drag due to rudder deflection, aileron deflection, and side slip.  
@@ -70,7 +70,7 @@ geometry cbar  2.297     # [ft]   [x] see asw20 notes 021011
 geometry Sw  113         # [ft^2] [x] see asw20 notes 021011
 
 # estimates for now
-controlSurface de 17 28 # [deg]
+controlSurface de 28 17 # [deg] max/min: 28 deg (nose up), -17 (nose down)
 controlSurface da 25 25 # [deg]
 controlSurface dr 25 25 # [deg]
 # Use the dr below when flying with enable-auto-coordination option
