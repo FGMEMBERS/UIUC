@@ -108,9 +108,6 @@ CD CDfa   CDfa.dat    0 1
 Cm Cmfa   Cmfa2.dat   0 1
 Cm Cmfade Cmfade6.dat 0 1 1
 Cm Cm_q     -3.5        # [/rad], estimate
-# correct 2D data to 3D
-# the biplane effect reduces the 2D moment because each airfoil/wing is immersed in the other's curved slipstream
-Cm Cmo  .02
 
 # da negative right aileron TEU
 CY CY_beta   -.321       # [/rad], -.0056/deg
