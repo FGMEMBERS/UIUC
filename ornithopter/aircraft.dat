@@ -54,7 +54,7 @@ init Dx_cg -.225
 init U_body 40
 init V_body 0
 init W_body 0
-init W_body 8.4
+init Q_body -.3
 
 #init downwashMode 100    
 #init downwashCoef 0.025  # [1/ft] [ ] placeholder
