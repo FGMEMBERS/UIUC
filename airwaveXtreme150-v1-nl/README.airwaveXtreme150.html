@@ -3,8 +3,12 @@
 = Generic Hang Glider                                =
 = for FlightGear with LaRCsim and the UIUC Aeromodel =
 =                                                    =
-= Michael Selig, et al                               =
-= <a href="http://amber.aae.uiuc.edu/~m-selig/apasim.html">http://amber.aae.uiuc.edu/~m-selig/apasim.html</a>     =
+= Flight model by:                                   =
+= Michael Selig, et al. (m-selig@uiuc.edu)           =
+= <a href="http://www.aae.uiuc.edu/m-selig/apasim.html">http://www.aae.uiuc.edu/m-selig/apasim.html</a>     =
+=                                                    =
+= External model by:                                 =
+= Captain Slug (captainslg@aol.com)                  =
 ======================================================
 
 To run, try:
@@ -21,50 +25,29 @@ UIUC/airwaveXtreme150-v1-nl/CDfade.dat
 UIUC/airwaveXtreme150-v1-nl/CLfade.dat
 UIUC/airwaveXtreme150-v1-nl/Cmfade.dat
 UIUC/airwaveXtreme150-v1-nl/README.airwaveXtreme150.html
-
-These files above come with the FlightGear base package.
-
-Files and directory structure required in $FG_ROOT/Aircraft/ to see the
-external 3D model:
-
 airwaveXtreme150/Models/uiuc/hgldr-cs/hgldr_cs.0af
 airwaveXtreme150/Models/uiuc/hgldr-cs/hgldr_cs.1af
 airwaveXtreme150/Models/uiuc/hgldr-cs/hgldr_cs.mdl
 airwaveXtreme150/Models/uiuc/hgldr-cs/hgldr-cs-model.xml
 
-These files can be obtained from Wolfram Kuss' website here:
-
-<a href="http://home.t-online.de/home/Wolfram.Kuss/">http://home.t-online.de/home/Wolfram.Kuss/</a>
-
-The 3D model is here:
-
-<a href="http://home.t-online.de/home/Wolfram.Kuss/Gliders/Gliders.htm">http://home.t-online.de/home/Wolfram.Kuss/Gliders/Gliders.htm</a>
-
-Download the zip file and model files in the directory indicated above.
-Under linux, the files from zip archive might need to be renamed to
-lower case (if they are not already that way).  Renaming to lower case
-will be necessary if FlightGear crashes when trying to read the texture files.
-
-To use the new aircraft model and not the default Opus glider, edit the
-airwaveXtreme150-v1-nl-uiuc-set.xml file and change the string:
-
-"Aircraft/UIUC/Models/opus/opus-model.xml"
-
-to 
-
-"Aircraft/airwaveXtreme150/Models/uiuc/hgldr-cs/hgldr-cs-model.xml"
-
-after the model files have been installed.
+These files above come with the FlightGear base package.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Model description and updates:
 
-5/25/02 - First release: v1-nl
+11/8/2002 - External model files added.  
+
+* Permission granted to use and release these with FlightGear under
+  the GNU GPL.  Thanks go to Captain Slug (captainslg@aol.com)!
+
+
+5/25/2002 - First release: v1-nl
 
 * Despite its namesake, this is not intended to be a model of the
   Airwave Xtreme hang glider.  However, this hang glider has relatively
-  high performance with a max L/D of approximately 12.
+  high performance with a max L/D of approximately 12, which is in
+  line with the Airwave Xtreme 150.
 
 * Lift, drag and pitching moment is modeled from -180 to +180 deg.
 
@@ -129,7 +112,7 @@ Model description and updates:
  Urbana, IL 61801-2935
  (217) 244-5757 (o), (509) 691-1373 (fax)
  m-selig@uiuc.edu
- <a href="http://www.uiuc.edu/~m-selig">http://www.uiuc.edu/~m-selig</a>
+ <a href="http://www.aae.uiuc.edu/m-selig">http://www.aae.uiuc.edu/m-selig</a>
 **************************************************
 
 </pre>
