@@ -1,0 +1,149 @@
+
+<pre>
+======================================================
+= 1903 Wright Flyer                                  =
+= for FlightGear with LaRCsim and the UIUC Aeromodel =
+=                                                    =
+= Michael Selig, et al                               =
+= <a href="http://amber.aae.uiuc.edu/~m-selig/apasim.html">http://amber.aae.uiuc.edu/~m-selig/apasim.html</a>     =
+======================================================
+
+To run, try:
+
+fgfs --aircraft=wrightFlyer1903-v1-nl-uiuc --enable-auto-coordination --start-date-sys=1903:12:18:10:35:00:
+
+Files and directory structure required in $FG_ROOT/Aircraft/ to fly the
+model:
+
+wrightFlyer1903-v1-nl-uiuc-set.xml
+wrightFlyer1903/Sounds/uiuc/wrightFlyer1903-sound.xml
+UIUC/wrightFlyer1903-v1-nl/aircraft.dat
+UIUC/wrightFlyer1903-v1-nl/CDfa.dat
+UIUC/wrightFlyer1903-v1-nl/Cmfa2.dat
+UIUC/wrightFlyer1903-v1-nl/Cmfade6.dat
+UIUC/wrightFlyer1903-v1-nl/CLfade.dat
+
+These files above come with the FlightGear base package.
+
+Files and directory structure required in $FG_ROOT/Aircraft/ to see the
+external 3D model
+
+wrightFlyer1903/Models/uiuc/03Flyer/03Flyer.mdl
+wrightFlyer1903/Models/uiuc/03Flyer/flywheel.bmp
+wrightFlyer1903/Models/uiuc/03Flyer/panel.bmp
+wrightFlyer1903/Models/uiuc/03Flyer/pilotook.bmp
+wrightFlyer1903/Models/uiuc/03Flyer/sprocket_32.bmp
+wrightFlyer1903/Models/uiuc/03Flyer/wing2_32.bmp
+wrightFlyer1903/Models/uiuc/03Flyer/wing2.bmp
+wrightFlyer1903/Models/uiuc/03Flyer/03Flyer-model.xml
+
+Information on these files can be obtained from Wolfram Kuss' website
+here:
+
+<a href="http://home.t-online.de/home/Wolfram.Kuss/">http://home.t-online.de/home/Wolfram.Kuss/</a>
+
+The 3D model is here:
+
+<a href="http://home.t-online.de/home/Wolfram.Kuss/FGFS1/FGFS1.htm">http://home.t-online.de/home/Wolfram.Kuss/FGFS1/FGFS1.htm</a>
+
+Download the zip file and model files in the directory indicated
+above.  Under linux, the files from zip archive might need to be
+renamed to lower case (if they are not already that way).  Renaming to
+lower case will be necessary if FlightGear crashes when trying to read
+the texture files.
+
+To use the new aircraft model and not the default Opus glider, edit the
+wrightFlyer1903-v1-nl-uiuc-set.xml file and change the string:
+
+"Aircraft/UIUC/Models/opus/opus-model.xml"
+
+to 
+
+"Aircraft/wrightFlyer1903/Models/uiuc/03Flyer/03Flyer-model.xml"
+
+after the model files have been installed.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Model description and updates:
+
+5/26/02 - First release: v1-nl
+
+* This model is based partly on wind tunnel tests of a 1903 Wright
+  Flyer replica tested at NASA Ames by a group lead by Prof Culick at
+  Caltech.  The model is a nonlinear model, meaning that stall is
+  included.  Because the replica was not tested to stall, data in this
+  regime had to be deduced from a number of different sources,
+  including low Reynolds number airfoil data taken at UIUC.
+
+* Wonder what it was like to fly the 1903 Wright Flyer?  Be a test
+  pilot.  See the longitudinal static instability.  Fly steady,
+  straight and level using some trim to help relieve pressure on the
+  stick, then put in a brief canard pulse (elevator stick) so as not
+  to change the trim speed.  With an up canard pulse and hands off the
+  stick, the Wright Flyer will start to pitch upwards until it
+  stalls. Down pulse, and it goes down.  This same instability is seen
+  by simply trying to fly straight and level!  The rates are low
+  enough that a good pilot with practice can stay ahead of the static
+  instability.  Stall can get pretty nasty if both the canard and
+  biplane wing stall at the same time. Typically, however, only the
+  canard will stall first.  Full up elevator can be used to fly out of
+  the dive.  But in this condition the canard is stalled. Relieving
+  the back pressure will move the canard out of stall and the pull-out
+  will be a little bit faster, but the difference is hard to notice.
+  Keep in mind that this aircraft was flown four times before it was
+  damaged on Dec 17, 1903.  The first flight was 120 feet in 12
+  seconds, and the last was 852 feet in 59 seconds.  How far can you
+  fly?
+
+* Run with the FGFS "enable-auto-coordination" option (see run command
+  at the top of this file) to model the coupling between the wing
+  warping and rudder to counteract the adverse yaw effect of the wing
+  warping.  The amount of coupling has been tuned to match that on the
+  original Wright Flyer.  The resulting handling is not that great.
+  For later designs, the Wright Brothers decoupled the warping and
+  rudder to have more control and the ability to fly in coordinated
+  flight ("cross-controls").
+
+* Finally, it's a hand full!
+
+* References:
+ 
+  - Culick, F.E.C. and Jex, H.R., "Aerodynamics, Stability and
+    Control of the 1903 Wright Flyer," Proceedings of The Wright
+    Flyer: An Engineering Perspective, National Air and Space Museum,
+    Smithsonian Institution, 1985.
+
+  - Jex, H.R. and Culick, F.E.C., "Flight Control Dynamics of the
+    1903 Wright Flyer," 12th AIAA Atmospheric Flight Mechanics
+    Conference, AIAA Paper 85-1804-CP, 1985.
+
+  - Jex, H, Grimm, R., Latz, J.P., and Hange, C., "Full-Scale 1903
+    Wright Flyer Wind Tunnel Test Results From the NASA Ames Research
+    Center", AIAA 38th Aerospace Sciences Meeting, AIAA Paper
+    2000-0512, 2000.
+
+  - Various other sources including 
+    http://www.wrightflyer.org/Papers/papers.html
+    http://amber.aae.uiuc.edu/~m-selig/uiuc_lsat.html (low Re data)
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+**************************************************
+ Prof. Michael S. Selig
+ Dept. of Aerospace Engineering
+ University of Illinois at Urbana-Champaign
+ 306 Talbot Laboratory
+ 104 South Wright Street
+ Urbana, IL 61801-2935
+ (217) 244-5757 (o), (509) 691-1373 (fax)
+ m-selig@uiuc.edu
+ <a href="http://www.uiuc.edu/~m-selig">http://www.uiuc.edu/~m-selig</a>
+**************************************************
+
+</pre>
+

@@ -1,0 +1,200 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# Aircraft:
+# 1903 Wright Flyer
+#
+# File name:
+# wrightFlyer1903-nl-v1
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# Author:
+#
+# Michael Selig
+# http://www.uiuc.edu/~m-selig
+# 2002/02/27   initial creation using
+# 2002/03/08   various refinements, focusing on the pitching moment behavior
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# References:
+# 
+#  - Culick, F.E.C. and Jex, H.R., "Aerodynamics, Stability and
+#    Control of the 1903 Wright Flyer," Proceedings of The Wright
+#    Flyer: An Engineering Perspective, National Air and Space Museum,
+#    Smithsonian Institution, 1985.
+#
+#  - Jex, H.R. and Culick, F.E.C., "Flight Control Dynamics of the
+#    1903 Wright Flyer," 12th AIAA Atmospheric Flight Mechanics
+#    Conference, AIAA Paper 85-1804-CP, 1985.
+#
+#  - Jex, H, Grimm, R., Latz, J.P., and Hange, C., "Full-Scale 1903
+#    Wright Flyer Wind Tunnel Test Results From the NASA Ames Research
+#    Center", AIAA 38th Aerospace Sciences Meeting, AIAA Paper
+#    2000-0512, 2000.
+#
+#  - Various other sources including 
+#    http://www.wrightflyer.org/Papers/papers.html
+#    http://amber.aae.uiuc.edu/~m-selig/uiuc_lsat.html (low Re data)
+#
+# - Additional models and updates 
+#   http://amber.aae.uiuc.edu/~m-selig/apasim.html
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# Notes:
+# - normal cruise speed:           30 mph
+# [] check rate derivatives
+# [x] check 
+# [] simple engine used, check max thrust
+# [] apparent mass effects are not include 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# aero forces are about a point 2 ft above the c.g.
+#init Dz_cg   0          # [ft]
+
+init use_V_rel_wind_2U
+init use_dyn_on_speed_curve1
+init dyn_on_speed  2
+init dyn_on_speed_zero 1
+
+
+# geometry
+geometry bw   40.3      # [ft]
+geometry cbar  6.2      # [ft]
+# biplane!
+geometry Sw  518         # [ft^2]
+
+
+# canard
+controlSurface de 20 20 # [deg]
+# wing warping
+controlSurface da 12 12 # [deg]
+# rudder coupling: coupling wing warp to rudder is delta_r = 2.5 * delta_w
+# but code uses coupling of delta_r = delta_a/2, so here the max limits must be 1:5
+controlSurface dr 60 60 # [deg]
+
+# if enable-auto-coordination is not used w/ FGFS startup options, then use
+# where 30 deg rudder can be used with 12 deg aileron (2.5:1)
+#controlSurface dr 30 30 # [deg]
+
+mass Weight    750      # [lb]
+# estimates mass moments
+mass I_xx     1318      # [slug-ft^2]
+mass I_yy      271      # [slug-ft^2]
+mass I_zz     1343      # [slug-ft^2]
+mass I_xz        0      # [slug-ft^2]
+
+#  /* Wright Flyer
+#  F_Z_aero += -(0.269 * Mass) * W_dot_body;
+#  M_l_aero += -(0.59  * I_xx) * P_dot_body;
+#  M_m_aero += -(0.14  * I_yy) * Q_dot_body; */
+# Apparent mass terms
+mass Mass_appMass_ratio  .269
+mass I_xx_appMass_ratio  .590
+mass I_yy_appMass_ratio  .14
+
+
+# [] max thrust estimate
+engine simpleSingle  171  # [lb]
+# 
+#engine simpleSingle  371  # [lb]
+
+# lift curve
+CL CLfade CLfade.dat  0 1
+
+# drag polar
+CD CDfa   CDfa.dat    0 1
+
+# moment contributions
+Cm Cmfa   Cmfa2.dat   0 1
+Cm Cmfade Cmfade6.dat 0 1 1
+Cm Cm_q     -3.5        # [/rad], estimate
+
+# da negative right aileron TEU
+CY CY_beta   -.321       # [/rad], -.0056/deg
+CY CY_da     -.636       # [/rad], -.0111/deg
+CY CY_dr     0.241       # [/rad], 0.0042/deg
+# [] mss - update rate derivatives
+CY CY_p      0.0         # [/rad], placeholder
+CY CY_r      0.3         # [/rad], placeholder
+
+Cl Cl_beta   0.0212      # [/rad], 0.00037033/deg
+Cl Cl_da    -0.1317      # [/rad], -.0023/deg
+Cl Cl_dr     0.007       # [/rad], 0.000125/deg
+# [] mss - update rate derivatives
+Cl Cl_p     -0.5         # [/rad], placeholder
+Cl Cl_r      0           # [/rad], placeholder
+
+Cn Cn_beta   0.0335      # [/rad], 0.0005853/deg
+Cn Cn_dr    -0.039       # [/rad], -.0069/deg
+Cn Cn_da     0.024       # [/rad], 0.000421/deg
+# [] mss - update rate derivatives
+Cn Cn_p     -0.06        # [/rad], placeholder
+Cn Cn_r     -0.15        # [/rad], placeholder
+
+# nose wheel (must be position 0 if present)
+gear Dx_gear     0     6.5      # x-offset from CG [ft]
+gear Dy_gear     0     0        # y-offset from CG [ft]
+gear Dz_gear     0     4.5      # z-offset from CG [ft]
+gear cgear       0   300        # damping [lbs/ft/sec]
+gear kgear       0   600        # springiness [lbs/ft]
+gear muGear      0     0        # rolling coefficient
+gear strutLength 0    -0.5      # gear travel [ft] (not yet used)
+
+# right gear (must be position 1 if present)
+gear Dx_gear     1    -8.5      # [ft]
+gear Dy_gear     1     3.25     # [ft]
+gear Dz_gear     1     4        # [ft]
+gear cgear       1   300        # [lbs/ft/sec]
+gear kgear       1   600        # [lbs/ft]
+gear muGear      1     0        # rolling coefficient
+gear strutLength 1     2.5      # gear travel [ft] (not yet used)
+
+# left gear (must be position 2 if present)
+gear Dx_gear     2    -8.5      # [ft]
+gear Dy_gear     2    -3.25     # [ft]
+gear Dz_gear     2     4        # [ft]
+gear cgear       2   300        # [lbs/ft/sec]
+gear kgear       2   600        # [lbs/ft]
+gear muGear      2     0        # rolling coefficient
+gear strutLength 2     2.5      # gear travel [ft] (not yet used)
+
+# right wing
+gear Dx_gear     3     0        # [ft]
+gear Dy_gear     3    21        # [ft]
+gear Dz_gear     3     1        # [ft]
+gear cgear       3   400        # [lbs/ft/sec]
+gear kgear       3   800        # [lbs/ft]
+gear muGear      3     0        # rolling coefficient
+gear strutLength 3     2.5      # gear travel [ft] (not yet used)
+
+# left wing
+gear Dx_gear     4     0        # [ft]
+gear Dy_gear     4   -21        # [ft]
+gear Dz_gear     4     1        # [ft]
+gear cgear       4   300        # [lbs/ft/sec]
+gear kgear       4   800        # [lbs/ft]
+gear muGear      4     0        # rolling coefficient
+gear strutLength 4     2.5      # gear travel [ft] (not yet used)
+
+#record Simtime
+#record Alpha_deg
+#record CL
+#record Cm
+#record elevator_deg
+#record aileron_deg
+#record rudder_deg
+#record CmfaI
+#record CmfadeI
+#record Long_trim_deg
+#record M_m_cg
+#record M_m_rp
+#record F_Z
+#record Dx_cg
+#record F_X
+#record Dz_cg
+
+* 
+
+
