@@ -183,7 +183,7 @@ Cl Cl_p     -0.26       # [/rad] [x] roll moment due to roll rate (damping), Ref
 Cn Cn_p     0.022       # [/rad] [x] yaw moment due to roll rate,            Ref [1]
 
 #gear gear_max 1
-gear gear_rate 1 1
+gear gear_rate .333   # [unit-norm/sec] retracts gear in 3 sec
 
 # nose wheel (must be position 0 if present)
 gear Dx_gear     0    10.2      # x-offset from CG [ft]
@@ -274,5 +274,7 @@ gear cgear       9   500        # [lbs/ft/sec]
 gear kgear       9  1000        # [lbs/ft]
 gear muGear      9     0.01     # rolling coefficient
 gear strutLength 9     -.5      # gear travel [ft] (not yet used)
+
+record debug5
 
 *
