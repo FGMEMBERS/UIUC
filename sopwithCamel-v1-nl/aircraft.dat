@@ -210,6 +210,8 @@ gear kgear   5  300      # [lbs/ft]
 gear muGear  5 10.0      # rolling coefficient
 gear strutLength 5 2.5   # [ft]
 
+*
+
 record Simtime
 record Alpha_deg
 record Beta_deg
