@@ -6,15 +6,16 @@
 =                                                    =
 = Flight model by:                                   =
 = Michael Selig, et al  (m-selig@uiuc.edu)           =
-= <a href="http://amber.aae.uiuc.edu/~m-selig/apasim.html">http://amber.aae.uiuc.edu/~m-selig/apasim.html</a>     =
+= <a href="http://www.aae.uiuc.edu/m-selig/apasim.html">http://www.aae.uiuc.edu/m-selig/apasim.html</a>     =
 =                                                    =
 = Visual model by:                                   =
 = Jim Wilson (jimw@kelcomaine.com)                   =
+= and some help from Paul Beardsley                  =
 ======================================================
 
 To run, try:
 
-fgfs --aircraft=wrightFlyer1903-v1-nl-uiuc --disable-random-objects
+fgfs --aircraft=wrightFlyer1903-v1-nl-uiuc
 
 Files and directory structure required in $FG_ROOT/Aircraft/ to fly the
 model:
@@ -26,78 +27,55 @@ UIUC/wrightFlyer1903-v1-nl/CDfa.dat
 UIUC/wrightFlyer1903-v1-nl/Cmfa2.dat
 UIUC/wrightFlyer1903-v1-nl/Cmfade6.dat
 UIUC/wrightFlyer1903-v1-nl/CLfade.dat
-wrightFlyer1903/Models/WrightFlyer-pb-jw-01.rgb ... snapshot from 11/9/02
-wrightFlyer1903/Models/WrightFlyer-pb-jw-02.rgb
-wrightFlyer1903/Models/WrightFlyer-pb-jw-03.rgb
-wrightFlyer1903/Models/WrightFlyer-pb-jw.ac
-wrightFlyer1903/Models/WrightFlyer-pb-jw.xml
+wrightFlyer1903/Models/[visual model files]
 
 These files above come with the FlightGear base package.
-
-Files and directory structure required in $FG_ROOT/Aircraft/ to see the
-external 3D model
-
-wrightFlyer1903/Models/uiuc/03Flyer/03Flyer.mdl
-wrightFlyer1903/Models/uiuc/03Flyer/flywheel.bmp
-wrightFlyer1903/Models/uiuc/03Flyer/panel.bmp
-wrightFlyer1903/Models/uiuc/03Flyer/pilotook.bmp
-wrightFlyer1903/Models/uiuc/03Flyer/sprocket_32.bmp
-wrightFlyer1903/Models/uiuc/03Flyer/wing2_32.bmp
-wrightFlyer1903/Models/uiuc/03Flyer/wing2.bmp
-wrightFlyer1903/Models/uiuc/03Flyer/03Flyer-model.xml
-
-Other external models can be found, but they will not be as good as
-the FGFS customized one from Jim Wilson.  The other sites:
-
-<a href="http://home.t-online.de/home/Wolfram.Kuss/FGFS1/FGFS1.htm">http://home.t-online.de/home/Wolfram.Kuss/FGFS1/FGFS1.htm</a>
-
-and
-
-<a href=" http://www.flightxpress.de/files/0402/FS2002/Flugzeuge/wright03.zip">http://www.flightxpress.de/files/0402/FS2002/Flugzeuge/wright03.zip</a>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Model description and updates:
 
-11/9/02 - Made mention of Jim Wilson's 3D model in this file.
+12/21/02 - Updates to aircraft aero file, and tweaks (above and below)
+           in this file.
 
 5/26/02 - First release: v1-nl
 
 * This model is based partly on wind tunnel tests of a 1903 Wright
   Flyer replica tested at NASA Ames by a group lead by Prof Culick at
-  Caltech.  The model is a nonlinear model, meaning that stall is
-  included.  Because the replica was not tested to stall, data in this
-  regime had to be deduced from a number of different sources,
-  including low Reynolds number airfoil data taken at UIUC.
+  Caltech.  The model is a nonlinear model, meaning that stall of both
+  the canard and biplane wing is included.  Because the replica was
+  not tested to stall, data in this regime had to be deduced from a
+  number of different sources, including low Reynolds number airfoil
+  data taken at UIUC.
 
 * Wonder what it was like to fly the 1903 Wright Flyer?  Be a test
   pilot.  See the longitudinal static instability.  Fly steady,
-  straight and level using some trim to help relieve pressure on the
-  stick, then put in a brief canard pulse (elevator stick) so as not
-  to change the trim speed.  With an up canard pulse and hands off the
-  stick, the Wright Flyer will start to pitch upwards until it
-  stalls. Down pulse, and it goes down.  This same instability is seen
-  by simply trying to fly straight and level!  The rates are low
-  enough that a good pilot with practice can stay ahead of the static
-  instability.  Stall can get pretty nasty if both the canard and
-  biplane wing stall at the same time. Typically, however, only the
-  canard will stall first.  Full up elevator can be used to fly out of
-  the dive.  But in this condition the canard is stalled. Relieving
-  the back pressure will move the canard out of stall and the pull-out
-  will be a little bit faster, but the difference is hard to notice.
-  Keep in mind that this aircraft was flown four times before it was
-  damaged on Dec 17, 1903.  The first flight was 120 feet in 12
-  seconds, and the last was 852 feet in 59 seconds.  How far can you
-  fly?
+  straight and level, then put in a brief canard pulse (elevator
+  stick) so as not to change the trim speed.  With an up canard pulse
+  and hands off the stick, the Wright Flyer will start to pitch
+  upwards until it stalls.  Down pulse, and it goes down.  This same
+  instability is seen by simply trying to fly straight and level!  The
+  rates are low enough that a good pilot with practice can stay ahead
+  of the static instability.  Stall can get pretty nasty if both the
+  canard and biplane wing stall at the same time. Typically, however,
+  the canard will stall first.  Full up elevator can be used to fly
+  out of the dive.  But in this condition the canard is
+  stalled.  Relieving the back pressure will move the canard out of
+  stall and the pull-out will be a little bit faster, but the
+  difference is hard to notice.  Keep in mind that this aircraft was
+  flown four times before it was damaged on Dec 17, 1903.  The first
+  flight was 120 feet in 12 seconds, and the last was 852 feet in 59
+  seconds.  How far can you fly?
 
-* Run with the FGFS "enable-auto-coordination" option (see run command
-  at the top of this file) to model the coupling between the wing
-  warping and rudder to counteract the adverse yaw effect of the wing
-  warping.  The amount of coupling has been tuned to match that on the
-  original Wright Flyer.  The resulting handling is not that great.
-  For later designs, the Wright Brothers decoupled the warping and
-  rudder to have more control and the ability to fly in coordinated
-  flight ("cross-controls").
+* Run with the FGFS "enable-auto-coordination" option (default setup
+  includes this option) to model the coupling between the wing warping
+  and rudder to counteract the adverse yaw effect of the wing warping.
+  The amount of coupling has been set to match that on the original
+  Wright Flyer (see the aircraft.dat file for some specs).  The
+  resulting handling is "not that great."  For later designs, the
+  Wright Brothers decoupled the warping and rudder to have more
+  control and the ability to fly in coordinated flight with
+  cross-controls.
 
 * Finally, it's a hand full!
 
@@ -119,7 +97,7 @@ Model description and updates:
 
   - Various other sources including 
     http://www.wrightflyer.org/Papers/papers.html
-    http://amber.aae.uiuc.edu/~m-selig/uiuc_lsat.html (low Re data)
+    http://www.aae.uiuc.edu/m-selig/uiuc_lsat.html (low Re data)
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -136,7 +114,7 @@ Model description and updates:
  Urbana, IL 61801-2935
  (217) 244-5757 (o), (509) 691-1373 (fax)
  m-selig@uiuc.edu
- <a href="http://www.uiuc.edu/~m-selig">http://www.uiuc.edu/~m-selig</a>
+ <a href="http://www.aae.uiuc.edu/m-selig">http://www.aae.uiuc.edu/m-selig</a>
 **************************************************
 
 </pre>
