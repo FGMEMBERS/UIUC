@@ -34,6 +34,7 @@ sopwithCamel/Models/uiuc/sopwithCamel/Sop-panel.bmp
 sopwithCamel/Models/uiuc/sopwithCamel/camel.txt
 sopwithCamel/Models/uiuc/sopwithCamel/cambelg.mdl
 sopwithCamel/Models/uiuc/sopwithCamel/sopwithCamel-model.xml
+sopwithCamel/Models/uiuc/sopwithCamel/README.TXT
 sopwithCamel/Sounds/uiuc/sopwithCamel-sound.xml
 UIUC/sopwithCamel-v1-nl/aircraft.dat
 UIUC/sopwithCamel-v1-nl/CDfa-06.dat
@@ -47,6 +48,42 @@ These files above come with the FlightGear base package.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Model description and updates:
+
+11/10/2002 - Notes below added
+
+* The Sopwith Camel did not have brakes.  Application of brakes in
+  FGFS will cause the aircraft to promptly nose over.  (I have added a
+  fake contact point so that the aircraft does not completely tip
+  over.)  The c.g. of the aircraft sits almost directly above the
+  wheel contact point.  There is a reason for this.  The aft fuselage
+  and tail were designed to be very light.  Thus, the tail could not
+  support much load, so the weight of the aircraft largely rests on
+  the main wheels, which again requires the c.g. to be almost directly
+  above the wheels.
+
+* WWI aircraft engines did not have a conventional throttle (at least
+  most did not).  The engines were either on or off/idle using a
+  "blip-throttle".  So it is not realistic to fly with a variable
+  throttle, which the current model allows.
+
+* To modelers, I can provide a graphic showing the c.g. location.
+
+* To those having specific knowledge of the Sopwith Camel, I am
+  interested in obtaining the following data:
+
+  [] Wing airfoil section
+
+  [] RPM when the throttle is blipped.  I am currenting using 300 RPM.
+     The current aircraft uses a 150-hp Bentley B.R.1 engine, which is
+     what Capt Brown was flying on the day when he claimed to kill the
+     Red Baron.
+
+  [] Engine mass characteristics on a component by component basis.
+     This information will help me refine the polar moment of inertia
+     that drives the gyroscopic forces.
+
+  [] On a related notes, the mass of the propeller which also figures
+     into the gyroscopic forces.
 
 11/9/2002 - First release: v1-nl
 
@@ -93,11 +130,12 @@ Model description and updates:
     believed that collectively 1294 enemy aircraft were destroyed.
     
   - In large part, the challenges to flying the Sopwith Camel involve
-    the large gyroscopic forces from the rotating engine.  Pulling
-    nose up causes the aircraft to yaw to the right, yaw right and it
-    noses down, nose down and it yaws left, yaw left and it noses up.
-    Thus whatever the direction the nose goes, the airplane slews to
-    the right of that path.  This was particularly dangerous for
+    the large gyroscopic forces from the rotating engine (which
+    rotated clockwise when viewed from the cockpit).  Pulling nose up
+    causes the aircraft to yaw to the right, yaw right and it noses
+    down, nose down and it yaws left, yaw left and it noses up.  Thus
+    whatever the direction the nose goes, the airplane slews to the
+    right of that path.  This was particularly dangerous for
     right-hand turns if not properly managed.  The initial roll to the
     right takes place without any surprise.  But after having banked,
     pulling up elevator to turn causes the nose to "slew" to the right
