@@ -15,14 +15,11 @@
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-# Notes:
-# - 020715: Started life as beech99-v1.
-# - 020819: Added asw20 nonlinear parts for this template.
-#           At this stage, file format is thing of significance.
+# Notes: For history, see the file README.fkdr1.html
+#
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 # References:
-#
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -36,8 +33,6 @@ init use_Alpha_dot_on_speed 7   # [ft/sec] speed below which Alpha_dot is set to
 
 init downwashMode 100    
 init downwashCoef 0.036  # [1/ft] see Red Baron model notes 020901
-
-#init Alpha 10
 
 # geometry data
 geometry bw     23.58    # [ft]   [x] spreadsheet
@@ -69,16 +64,13 @@ engine simpleSingleModel 530 -4 270 # [lb] [fps]  [lb/fps]
 engine gyroForce_Q_body
 engine gyroForce_R_body
 engine omegaRPM 300 1200       # [rpm] {minOmegaRPM} {maxOmegaRPM}
-#engine omega {minOmega} {maxOmega}  
 engine polarInertia 10.0232    # [slug-ft^2]
 
 engine slipstream_effects    
 engine propDia 9             # [ft]
 
-# [] need to write code for these two lines and turn on
 #engine eta_q_CL_adot 1
 #engine eta_q_CL_q    1
-
 engine eta_q_Cm_q     1    
 engine eta_q_Cm_adot  1    
 engine eta_q_Cmfade   1    
@@ -96,34 +88,22 @@ engine eta_q_Cn_r     1
 engine eta_q_Cn_dr    1    
 
 
-
-
-# Lift buildup
-# Lift curve 
-#CL CLfade CLfade.dat 0 1 1
-CL CLfa CLfa-03.dat 0 1  # [x]
+# lift
+CL CLfa CLfa.dat 0 1     # [x] lift +-180 deg, see 020821-fokker-dr1 dir
 CL CL_adot  0.759        # [/rad] [x] LDM/S&C notes 020907 p 7
 CL CL_q     1.245        # [/rad] [x] LDM/S&C notes 020907 p 11
 
-# drag build up
-# aircraft parasite drag
-CD CDo      0.0323          # [x] NASA SP-468
-# extra wing parasite drag
-CD CDfa CDfa-03.dat 0 1 1   # [x]
-# drag due to elevator deflection
-CD CD_de 0.06               # []
-#CD CDfade CDfade.dat 0 1 1
-# - induced drag
-CD CDK 0.074                # [x] 020821 p. 1
+# drag
+CD CDo      0.0323        # [x] aircraft parasite drag, NASA SP-468, 
+CD CDfa CDfa.dat 0 1 1    # [x] extra wing parasite drag +-180 deg, see 020821-fokker-dr1 dir
+CD CD_de 0.06             # []
+CD CDK 0.074              # [x] Cl^2 drag component, see notes 020821 p. 1
 
-# Pitching moment 
-# Moment due to wing from nominally +-90 deg 
-Cm Cmfa Cmfa-03.dat  0 1        # [x]
-# Moment due to tail curve from nominally +-90 deg 
-Cm Cmfade Cmfade-01.dat  0 1 1  # [x]
-Cm Cm_adot -1.122               # [/rad]  [x] LDM/S&C notes 020907 p 7
-Cm Cm_q    -1.839               # [/rad]  [x] LDM/S&C notes 020907 p 11
-#Cm Cm_q    -2.023             # [/rad]  [x] LDM/S&C notes 020907 p 11, using 10% more rule
+# pitching moment
+Cm Cmfa Cmfa.dat  0 1        # [x] moment +-180 deg, see 020821-fokker-dr1 dir, 
+Cm Cmfade Cmfade.dat  0 1 1  # [x] moment due to tail from +-180 deg, see 020821-fokker-dr1 dir
+Cm Cm_adot -1.122            # [/rad]  [x] LDM/S&C notes 020907 p 7
+Cm Cm_q    -1.839            # [/rad]  [x] LDM/S&C notes 020907 p 11
 
 # side force
 CY CY_beta -0.59         # [/rad]
@@ -132,28 +112,20 @@ CY CY_r     0.39         # [/rad]
 CY CY_dr    0.0525       # [/rad] S&C notes 020920 p 3
 
 # roll moment
-Cl Cl_beta -0.005         # [/rad]
-#Cl Cl_beta -0.03        # [/rad] was using this until 020914
-#Cl Cl_p    -0.5         # [/rad]
-Cl Cl_p    -0.138          # [/rad] [x] based on LDM/S&C notes 020914 p 11
-#                                  also from pilot report: "substantial opposite aileron is required to stop the roll"
-#Cl Cl_p    -0.165         # [/rad] [x] based on LDM/S&C notes 020914 p 11, but adding 20% more for tail
+Cl Cl_beta -0.005        # [/rad]
+Cl Cl_p    -0.138        # [/rad] [x] based on LDM/S&C notes 020914 p 11
+                         #         also from pilot report: 
+                         #         "substantial opposite aileron is required to stop the roll"
 Cl Cl_r     0.14         # [/rad]
-#Cl Cl_da   -0.156       # [/rad] was using this up to 020914 when I change Cl_p roll damping
 Cl Cl_da   -0.087        # [/rad] "back of the envelope" LDM/S&C notes 020915 p1
-#Cl Cl_dr    0.0109      # [/rad] was using this up to 020914,
-#                                 changed per Brian's comments about turning flat w/ rudder
-Cl Cl_dr    0.0029      # [/rad] 020920 S&C notes, 020920 p.1-2
+Cl Cl_dr    0.0029       # [/rad] 020920 S&C notes, 020920 p.1-2
 
 # yaw moment
 Cn Cn_beta  0.08         # [/rad]
 Cn Cn_p     0.0109       # [/rad]
-#Cn Cn_r    -0.197        # [/rad] was, but is now
 Cn Cn_r    -0.188        # [/rad] S&C notes 020920 p 5
 Cn Cn_da    0.0512       # [/rad]
 Cn Cn_dr   -0.0497       # [/rad] S&C notes 020920 p 4
-
-# You can ignore the "gear" data below.
 
 # nose wheel (must be position 0 if present)
 gear Dx_gear 0 25.5     # x-offset from CG [ft]
@@ -210,23 +182,31 @@ gear kgear   5  300      # [lbs/ft]
 gear muGear  5 0.01      # rolling coefficient
 gear strutLength 5 2.5   # [ft]
 
+
+*
+record Simtime
+record Alpha_deg
+record Beta_deg
+record CL
+record CLfaI
+record CD
+record CDfaI
+record Cm
+record CmfaI
+*
+record V_rel_wind
+
 *
 
 test me
 
 #record F_X_engine
 #record F_X_aero
-
-#record Simtime
-#record Alpha_deg
 record debug1
 #record debug2
 #record debug3
-#record V_rel_wind
-#record Beta_deg
 *
 
-record CL
 record elevator_deg
 
 *
