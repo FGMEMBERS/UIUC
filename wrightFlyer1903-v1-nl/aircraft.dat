@@ -11,9 +11,12 @@
 # Author:
 #
 # Michael Selig
-# http://www.uiuc.edu/~m-selig
-# 2002/02/27   initial creation using
+# http://www.aae.uiuc.edu/m-selig
+# 2002/02/27   initial setup
 # 2002/03/08   various refinements, focusing on the pitching moment behavior
+# 2002/12/21   more updates
+#              - additional wing hard points
+#              - adding in engine curve (model)
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -35,42 +38,41 @@
 #
 #  - Various other sources including 
 #    http://www.wrightflyer.org/Papers/papers.html
-#    http://amber.aae.uiuc.edu/~m-selig/uiuc_lsat.html (low Re data)
+#    http://www.aae.uiuc.edu/m-selig/uiuc_lsat.html (low Re data)
 #
-# - Additional models and updates 
-#   http://amber.aae.uiuc.edu/~m-selig/apasim.html
+#  - Additional models and updates 
+#    http://www.aae.uiuc.edu/m-selig/apasim.html
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 # Notes:
-# - normal cruise speed:           30 mph
-# [] check rate derivatives
-# [x] check 
-# [] simple engine used, check max thrust
-# [] apparent mass effects are not include 
+# '[]' these items below still to do
+#
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# aero forces are about a point 2 ft above the c.g.
-#init Dz_cg   0          # [ft]
-
+# initializations
 init use_V_rel_wind_2U
 init use_dyn_on_speed_curve1
 init dyn_on_speed  2
 init dyn_on_speed_zero 1
+init use_Alpha_dot_on_speed 2   # [ft/sec] speed below which Alpha_dot is set to zero    
 
 # geometry
 geometry bw   40.3      # [ft]
 geometry cbar  6.2      # [ft]
-# biplane!
-geometry Sw  518         # [ft^2]
+geometry Sw  518        # [ft^2]
 
 # canard
-controlSurface de 20 20 # [deg]
-# wing warping
-controlSurface da 12 12 # [deg]
-# rudder coupling: coupling wing warp to rudder is delta_r = 2.5 * delta_w
-# but code uses coupling of delta_r = delta_a/2, so here the max limits must be 1:5
-controlSurface dr 60 60 # [deg]
+controlSurface de  20   20 # [deg]
+# wing warping (delta_w)
+controlSurface da 8.5  8.5 # [deg]
+# Per discussion w/ Fred Culick, 
+# 11 inches up and 11 inch down movement is given on the Smithsonian plans.
+# With a 74-inch chord, this gives 8.5 deg up and 8.5 deg down of wing warping.
+# Rudder coupling of Flyer: coupling between wing warp and rudder is delta_r = 2.5 * delta_w
+# But w/ auto-coordination flag set to true in FGFS code, the amount of rudder used
+# is delta_r_used = delta_r_spec/2, so here the max limits must be 1:5.
+controlSurface dr 42.5 42.5 # [deg]
 
 # if enable-auto-coordination is not used w/ FGFS startup options, then use
 # where 30 deg rudder can be used with 12 deg aileron (2.5:1)
@@ -83,20 +85,21 @@ mass I_yy      271      # [slug-ft^2]
 mass I_zz     1343      # [slug-ft^2]
 mass I_xz        0      # [slug-ft^2]
 
-#  /* Wright Flyer
+#  Apparent mass terms
 #  F_Z_aero += -(0.269 * Mass) * W_dot_body;
 #  M_l_aero += -(0.59  * I_xx) * P_dot_body;
-#  M_m_aero += -(0.14  * I_yy) * Q_dot_body; */
-# Apparent mass terms
+#  M_m_aero += -(0.14  * I_yy) * Q_dot_body;
 mass Mass_appMass_ratio  .269
 mass I_xx_appMass_ratio  .590
 mass I_yy_appMass_ratio  .14
 
 
 # [] max thrust estimate
-engine simpleSingle  171  # [lb]
-# 
-#engine simpleSingle  371  # [lb]
+engine simpleSingleModel 171 -5  88    # [lb] [fps]  [lb/fps]
+# where token3 - static thrust in [lb]
+#       token4 - speed at which thrust goes to zero [ft/sec]
+#       token5 - slope dT/dV at the speed at which thrust goes to zero [lb/fps]
+#engine simpleSingle  171  # [lb]
 
 # lift curve
 CL CLfade CLfade.dat  0 1
@@ -107,27 +110,27 @@ CD CDfa   CDfa.dat    0 1
 # moment contributions
 Cm Cmfa   Cmfa2.dat   0 1
 Cm Cmfade Cmfade6.dat 0 1 1
-Cm Cm_q     -3.5        # [/rad], estimate
+Cm Cm_q     -3.5         # [/rad], estimate
 
 # da negative right aileron TEU
 CY CY_beta   -.321       # [/rad], -.0056/deg
 CY CY_da     -.636       # [/rad], -.0111/deg
 CY CY_dr     0.241       # [/rad], 0.0042/deg
-# [] mss - update rate derivatives
+# [] mss - update rotary derivatives
 CY CY_p      0.0         # [/rad], placeholder
 CY CY_r      0.3         # [/rad], placeholder
 
 Cl Cl_beta   0.0212      # [/rad], 0.00037033/deg
 Cl Cl_da    -0.1317      # [/rad], -.0023/deg
 Cl Cl_dr     0.007       # [/rad], 0.000125/deg
-# [] mss - update rate derivatives
+# [] mss - update rotary derivatives
 Cl Cl_p     -0.5         # [/rad], placeholder
 Cl Cl_r      0           # [/rad], placeholder
 
 Cn Cn_beta   0.0335      # [/rad], 0.0005853/deg
 Cn Cn_dr    -0.039       # [/rad], -.0069/deg
 Cn Cn_da     0.024       # [/rad], 0.000421/deg
-# [] mss - update rate derivatives
+# [] mss - update rotary derivatives
 Cn Cn_p     -0.06        # [/rad], placeholder
 Cn Cn_r     -0.15        # [/rad], placeholder
 
@@ -159,42 +162,57 @@ gear muGear      2     0        # rolling coefficient
 gear strutLength 2     2.5      # gear travel [ft] (not yet used)
 
 # right wing
-gear Dx_gear     3     0        # [ft]
+gear Dx_gear     3    -4        # [ft]
 gear Dy_gear     3    21        # [ft]
-gear Dz_gear     3     1        # [ft]
+gear Dz_gear     3     2.6      # [ft]
 gear cgear       3   400        # [lbs/ft/sec]
 gear kgear       3   800        # [lbs/ft]
 gear muGear      3     0        # rolling coefficient
 gear strutLength 3     2.5      # gear travel [ft] (not yet used)
 
 # left wing
-gear Dx_gear     4     0        # [ft]
+gear Dx_gear     4    -4        # [ft]
 gear Dy_gear     4   -21        # [ft]
-gear Dz_gear     4     1        # [ft]
-gear cgear       4   300        # [lbs/ft/sec]
+gear Dz_gear     4     2.6      # [ft]
+gear cgear       4   400        # [lbs/ft/sec]
 gear kgear       4   800        # [lbs/ft]
 gear muGear      4     0        # rolling coefficient
 gear strutLength 4     2.5      # gear travel [ft] (not yet used)
 
+# right wing
+gear Dx_gear     5     3        # [ft]
+gear Dy_gear     5    21        # [ft]
+gear Dz_gear     5     2.6      # [ft]
+gear cgear       5   400        # [lbs/ft/sec]
+gear kgear       5   800        # [lbs/ft]
+gear muGear      5     0        # rolling coefficient
+gear strutLength 5     2.5      # gear travel [ft] (not yet used)
+
+# left wing
+gear Dx_gear     6     3        # [ft]
+gear Dy_gear     6   -21        # [ft]
+gear Dz_gear     6     2.6      # [ft]
+gear cgear       6   400        # [lbs/ft/sec]
+gear kgear       6   800        # [lbs/ft]
+gear muGear      6     0        # rolling coefficient
+gear strutLength 6     2.5      # gear travel [ft] (not yet used)
+
+*
+
+#record aileron_deg
+#record rudder_deg
 #record elevator_deg
 #record Long_trim_deg
-
 #record Simtime
 #record Alpha_deg
 #record CL
 #record Cm
-#record elevator_deg
-#record aileron_deg
-#record rudder_deg
 #record CmfaI
 #record CmfadeI
 #record M_m_cg
 #record M_m_rp
 #record F_Z
-#record Dx_cg
 #record F_X
-#record Dz_cg
-
-* 
+#* 
 
 
