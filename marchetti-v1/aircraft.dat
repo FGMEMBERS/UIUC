@@ -72,7 +72,7 @@ CD CDo      0.0205      # []
 CD CD_a     0.12        # [/rad]
 CD CD_de    0.0         # [/rad]
 
-#Cm Cmo     -0.08        # []  Roskam
+#Cm Cmo     -0.08        # []  Roskam value
 Cm Cmo     -0.007       # []   Changed for trim at cruise speed
 Cm Cm_a    -0.24        # [/rad]
 Cm Cm_adot -9.6         # [/rad]
