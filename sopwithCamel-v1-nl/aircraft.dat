@@ -4,7 +4,7 @@
 # Sopwith F.1 Camel
 #
 # File name:
-# sopwithCamel-v1-nl
+# sopwithCamel-v2-nl
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
@@ -171,27 +171,27 @@ gear strutLength 0 -0.5 # gear travel [ft] (not yet used)
 
 
 # right gear (must be position 1 if present)
-gear Dx_gear 1  0.444    # [ft]
-gear Dy_gear 1 2.16      # [ft]
-gear Dz_gear 1 5.1       # [ft]
+gear Dx_gear 1  0.9042    # [ft]
+gear Dy_gear 1 2.1194     # [ft]
+gear Dz_gear 1 5.35       # [ft]
 gear cgear 1  600        # [lbs/ft/sec]
 gear kgear 1 1200        # [lbs/ft]
 gear muGear 1 0.01       # rolling coefficient
 gear strutLength 1 2.5   # [ft]
 
 # left gear (must be position 2 if present)
-gear Dx_gear 2  0.444    # [ft]
-gear Dy_gear 2 -2.16     # [ft]
-gear Dz_gear 2 5.1       # [ft]
+gear Dx_gear 2  0.9042    # [ft]
+gear Dy_gear 2 -2.1194    # [ft]
+gear Dz_gear 2 5.35       # [ft]
 gear cgear 2  600        # [lbs/ft/sec]
 gear kgear 2 1200        # [lbs/ft]
 gear muGear 2 0.01       # rolling coefficient
 gear strutLength 2 2.5   # [ft]
 
-# tail dragger 
-gear Dx_gear 3 -12.79    # [ft]
+# tail dragger  
+gear Dx_gear 3 -12.1824    # [ft]
 gear Dy_gear 3   0       # [ft]
-gear Dz_gear 3   1.4     # [ft]
+gear Dz_gear 3   2.8763    # [ft]
 gear cgear 3  100        # [lbs/ft/sec]
 gear kgear 3  200        # [lbs/ft]
 gear muGear 3 0.05       # rolling coefficient
