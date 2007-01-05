@@ -39,7 +39,8 @@
 
 # The Sopwith Camel was actually unstable.
 # Fly w/ an aft cg to try this out.
-#init Dx_cg -.3
+init Dx_cg -.3
+
 #record Dx_cg
 
 # various "init" FGFS settings
@@ -84,7 +85,7 @@ engine gyroForce_Q_body
 engine gyroForce_R_body
 engine omegaRPM 300 1250       # [rpm] {minOmegaRPM} {maxOmegaRPM}
 #engine omega {minOmega} {maxOmega}  
-#engine polarInertia 24.4019    # [slug-ft^2]      
+engine polarInertia 24.4019    # [slug-ft^2]      
 engine polarInertia 19.2143    # [slug-ft^2]      
 
 engine slipstream_effects    
